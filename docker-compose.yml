@@ -1,0 +1,23 @@
+services:
+  sample_backend:
+    build:
+      context: ./backend
+      dockerfile: backend.Dockerfile
+    container_name: sample_backend
+
+  sample_frontend:
+    build:
+      context: ./frontend
+      dockerfile: frontend.Dockerfile
+    container_name: sample_frontend
+
+  sample_proxy:
+    build:
+      context: ./proxy
+      dockerfile: proxy.Dockerfile
+    container_name: sample_proxy
+    ports:
+      - "5000:80"
+    depends_on:
+      - sample_backend
+      - sample_frontend
